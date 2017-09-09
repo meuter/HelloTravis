@@ -7,6 +7,7 @@ macro(add_unit_test TARGET)
     target_link_libraries(${TARGET}
         ${CMAKE_SOURCE_DIR}/build/contrib/googletest/googlemock/gtest/libgtest.a
         ${CMAKE_SOURCE_DIR}/build/contrib/googletest/googlemock/gtest/libgtest_main.a
+        pthread
     )
 endmacro(add_unit_test)
 
