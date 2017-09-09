@@ -2,6 +2,42 @@ language: cpp
 
 matrix:
   include:
+    # GCC Latest - Debug
+    - os: linux
+      compiler: gcc
+      env:
+         - MATRIX_EVAL="BUILD_TYPE=Debug"
+
+    # GCC Latest - Release
+    - os: linux
+      compiler: gcc
+      env:
+         - MATRIX_EVAL="BUILD_TYPE=Release"
+
+    # GCC Latest - Debug
+    - os: linux
+      compiler: clang
+      env:
+         - MATRIX_EVAL="BUILD_TYPE=Debug"
+
+    # GCC Latest - Release
+    - os: linux
+      compiler: clang
+      env:
+         - MATRIX_EVAL="BUILD_TYPE=Release"
+
+    # # GCC4.9 - Release
+    # - os: linux
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #       packages:
+    #         - g++-4.9
+    #   env:
+    #      - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && BUILD_TYPE=Release"
+
+
     # # GCC4.9 - Debug
     # - os: linux
     #   addons:
@@ -48,26 +84,26 @@ matrix:
     #      - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5 && BUILD_TYPE=Debug"
 
     # GCC6 - Release
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && BUILD_TYPE=Release"
+    # - os: linux
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #       packages:
+    #         - g++-6
+    #   env:
+    #     - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && BUILD_TYPE=Release"
 
-    # GCC6 - Debug
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && BUILD_TYPE=Debug"
+    # # GCC6 - Debug
+    # - os: linux
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #       packages:
+    #         - g++-6
+    #   env:
+    #     - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && BUILD_TYPE=Debug"
 
 
     # # Linux (CLANG)  
@@ -124,27 +160,32 @@ matrix:
     #   env:
     #     - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
 
-    # CLANG 5 - Release
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
-      env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && BUILT_TYPE=Release"
 
-    # CLANG 5 - Debug
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
-      env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && BUILT_TYPE=Debug"
+
+    # # CLANG 5 - Release
+    # - os: linux
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - llvm-toolchain-trusty-5.0
+    #       packages:
+    #         - clang-5.0
+    #   env:
+    #     - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && BUILT_TYPE=Release"
+
+    # # CLANG 5 - Debug
+    # - os: linux
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - llvm-toolchain-trusty-5.0
+    #       packages:
+    #         - clang-5.0
+    #   env:
+    #     - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && BUILT_TYPE=Debug"
+
+
+
 
     # WARNING: OSX Build on Travis are super slow / if working at al
     # # OSX (GCC)
