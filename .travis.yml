@@ -172,12 +172,9 @@ before_script:
   - cd build  
   - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
 
-jobs:
-  include:
-    - stage: build
-      script: cmake --build . -- -j10
-    - stage: test
-      script: ctest -j10 -C ${BUILD_TYPE} --output-on-failure
+script:
+  - cmake --build . -- -j10
+  - ctest -j10 -C ${BUILD_TYPE} --output-on-failure
 
 notifications:
   email: false
