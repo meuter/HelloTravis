@@ -1,10 +1,9 @@
 #include <gtest/gtest.h>
-#include <string>
-
-using namespace std::string_literals;
 
 TEST(hello, travis)
 {
-    const auto str = "Hello "s + "Travis"s;
-    EXPECT_EQ(str, "Hello Travis");
+    const auto hello = 1;
+    const auto travis = 2;
+    const auto hello_travis = 3;
+    EXPECT_EQ(hello+travis, hello+travis);
 }

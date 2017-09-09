@@ -173,8 +173,7 @@ before_script:
   - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
 
 script: 
-  - cmake --build .
-  - ctest
+  - cmake --build . && ctest
 
 notifications:
   email: false
