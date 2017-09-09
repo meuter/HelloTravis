@@ -9,4 +9,8 @@ before_script:
   - cd build
   - cmake ..
 
-script: make 
+script: 
+  - make -j 4
+
+notifications:
+  email: false
