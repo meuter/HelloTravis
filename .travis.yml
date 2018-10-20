@@ -114,7 +114,7 @@ script:
   ###########################################################################
   - mkdir -p build/Debug
   - cd build/Debug
-  - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=Debug ../../
+  - cmake -G "${GENERATOR}" -DCMAKE_BUILD_TYPE=Debug ../../
   - cmake --build . --config Debug
   - ctest --output-on-failure
   - cd ../..
@@ -124,7 +124,7 @@ script:
   ###########################################################################
   - mkdir -p build/Release
   - cd build/Release
-  - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=Release ../../
+  - cmake -G "${GENERATOR}" -DCMAKE_BUILD_TYPE=Release ../../
   - cmake --build . --config Release
   - ctest --output-on-failure
   - cd ../..
