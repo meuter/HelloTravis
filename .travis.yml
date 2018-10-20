@@ -13,13 +13,13 @@ matrix:
     - name: Windows - MSVC - x64
       <<: *windows
       env: 
-        - BUILD_TYPE=Release
+        - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Visual Studio 15 2017 Win64"
 
     - name: Windows - MSVC - x86
       <<: *windows
       env: 
-        - BUILD_TYPE=Release
+        - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Visual Studio 15 2017"
 
     - name: Linux - GCC
@@ -27,7 +27,7 @@ matrix:
       env:
         - CC=gcc
         - CXX=g++
-        - BUILD_TYPE=Release
+        - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Unix Makefiles"
 
     - name: Linux - Clang
@@ -35,15 +35,15 @@ matrix:
       env:
         - CC=clang
         - CXX=clang++
-        - BUILD_TYPE=Release
+        - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Unix Makefiles"
 
 script:
   - mkdir -p build
   - cd build  
-  - cmake -G "${CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
+  - cmake -G "${CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
   - cmake --build .
-  - ctest -C ${BUILD_TYPE} --output-on-failure
+  - ctest -C ${CMAKE_BUILD_TYPE} --output-on-failure
 
 notifications:
   email: false
