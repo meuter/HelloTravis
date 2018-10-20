@@ -1,15 +1,12 @@
 language: bash
 
-env:
-  - BUILD_TYPE=Release
-  - BUILD_TYPE=Debug
-
 matrix:  
   include:      
     - name: "Windows - MSVC"
       os: windows      
       env: 
         - CMAKE_PATH="/c/Program Files/CMake/bin"
+        - BUILD_TYPE=Release
       before_script:
         - export PATH=$CMAKE_PATH:$PATH
     - name: "Linux - GCC"
@@ -17,12 +14,14 @@ matrix:
       env:
         - CC=gcc
         - CXX=g++
+        - BUILD_TYPE=Release
     - name: "Linux - Clang"
       os: linux
       env:
         - CC=clang
         - CXX=clang++
-
+        - BUILD_TYPE=Release
+        
 script:
   - mkdir -p build
   - cd build  
