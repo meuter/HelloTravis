@@ -4,13 +4,8 @@ matrix:
   include:      
     - name: "Windows - MSVC"
       os: windows      
+      install: choco install --force cmake
       env: PATH="$PATH:/c/Program File/CMake/bin/"
-    - name: "Linux - GCC"
-      os: linux
-      env: MATRIX_EVAL="CC=gcc && CXX=g++"
-    - name: "Linux - Clang"
-      os: linux
-      env: MATRIX_EVAL="CC=clang && CXX=clang++"
 
 before_install:
   - eval "${MATRIX_EVAL}"
