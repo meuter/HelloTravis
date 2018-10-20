@@ -1,13 +1,15 @@
 language: bash
 
 matrix:
-  include:  
-    ## Windows
-    - os: windows
+  include:      
+    - name: "Windows - MSVC - Release"
+      os: windows
+      install: choco install cmake
       env: MATRIX_EVAL="BUILD_TYPE=Release"
-
-    ## Windows
-    - os: windows
+    
+    - name: "Windows - MSVC - Debug"
+      os: windows
+      install: choco install cmake
       env: MATRIX_EVAL="BUILD_TYPE=Debug"
 
 
