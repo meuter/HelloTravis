@@ -4,16 +4,27 @@ matrix:
   include:      
     - name: "Windows - MSVC"
       os: windows      
-      env:
+      env: 
         - CMAKE_PATH="/c/Program Files/CMake/bin"
-        - BUILD_TYPE=Release
-      script:
+      before_script:
         - export PATH=$CMAKE_PATH:$PATH
-        - mkdir -p build
-        - cd build  
-        - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
-        - cmake --build .
-        - ctest -C ${BUILD_TYPE} --output-on-failure
+    - name: "Linux - GCC"
+      os: linux
+      env:
+        - CC=gcc
+        - CXX=g++
+    - name: "Linux - Clang"
+      os: linux
+      env:
+        - CC=clang
+        - CXX=clang++
+
+script:
+  - mkdir -p build
+  - cd build  
+  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
+  - cmake --build .
+  - ctest -C ${BUILD_TYPE} --output-on-failure
 
 notifications:
   email: false
