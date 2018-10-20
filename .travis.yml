@@ -1,11 +1,11 @@
 language: bash
 
 templates:
-  release:
+  release: &release
     env: &release-env
       - CMAKE_BUILD_TYPE=Release
   
-  debug:
+  debug: &debug
     env: &debug-env
       - CMAKE_BUILD_TYPE=Debug
 
@@ -60,16 +60,19 @@ matrix:
     - name: Linux - GCC4.9 - x64
       <<: *linux
       <<: *gcc-49
+      <<: *release
       env: [ *release-env, *gcc-49-env ]
 
     - name: Linux - GCC5 - x64
       <<: *linux
-      <<: *gcc5
+      <<: *gcc-5
+      <<: *release
       env: [ *release-env, *gcc-5-env ]
 
     - name: Linux - GCC7 - x64
       <<: *linux
-      <<: *gcc7
+      <<: *gcc-7
+      <<: *release
       env: [ *release-env, *gcc-7-env ]
 
     - name: Linux - Clang - x64
