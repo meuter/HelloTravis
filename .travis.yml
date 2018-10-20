@@ -46,6 +46,7 @@ templates:
   windows: &windows
     os: windows
     env: &windows-env
+      - CMAKE_BUILD_CMD_ARGS="/nologo /verbosity:normal"
     before_script:
       - export PATH="/c/Program Files/CMake/bin":$PATH
     msvc15-x64: &msvc15-x64
@@ -62,15 +63,29 @@ templates:
 
 matrix:  
   include:      
-    - <<: *windows
+    - name: "Windows - MSVC15 - x64 - Release"
+      <<: *windows
       <<: *msvc15-x64
       <<: *release
       env: [ *windows-env, *release-env, *msvc15-x64-env ] 
 
-    - <<: *windows
+    - name: "Windows - MSVC15 - x86 - Release"
+      <<: *windows
       <<: *msvc15-x86
       <<: *release
       env: [ *windows-env, *release-env, *msvc15-x86-env ] 
+
+    - name: "Windows - MSVC15 - x64 - Debug"
+      <<: *windows
+      <<: *msvc15-x64
+      <<: *debug
+      env: [ *windows-env, *debug-env, *msvc15-x64-env ] 
+
+    - name: "Windows - MSVC15 - x86 - Debug"
+      <<: *windows
+      <<: *msvc15-x86
+      <<: *release
+      env: [ *windows-env, *debug-env, *msvc15-x86-env ] 
 
     - <<: *linux
       <<: *gcc-49
@@ -97,7 +112,7 @@ script:
   - mkdir -p build
   - cd build  
   - cmake -G "${CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
-  - cmake --build .
+  - cmake --build . --config ${CMAKE_BUILD_TYPE} -- ${CMAKE_BUILD_ARGS}
   - ctest --output-on-failure
 
 notifications:
