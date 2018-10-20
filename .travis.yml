@@ -9,15 +9,11 @@ matrix:
         - BUILD_TYPE=Release
       script:
         - export PATH=$CMAKE_PATH:$PATH
-
-before_script:
-  - mkdir -p build
-  - cd build  
-  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
-
-script:
-  - cmake --build . -- -j10
-  - ctest -j10 -C ${BUILD_TYPE} --output-on-failure
+        - mkdir -p build
+        - cd build  
+        - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
+        - cmake --build . -- -j10
+        - ctest -j10 -C ${BUILD_TYPE} --output-on-failure
 
 notifications:
   email: false
