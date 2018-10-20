@@ -1,56 +1,47 @@
 language: bash
 
 templates:
+  release:
+    env: &release-env
+      - CMAKE_BUILD_TYPE=Release
+  
+  debug:
+    env: &debug-env
+      - CMAKE_BUILD_TYPE=Debug
+
+  linux: &linux
+    os: linux
+    sources:
+      - ubuntu-toolchain-r-test
+    gcc-4.9: &gcc-49
+        packages:
+          - g++-4.9
+          - gcc-4.9
+        env: &gcc-49-env
+          - CC=gcc-4.9
+          - CXX=g++-4.9
+    gcc-5: &gcc-5
+        packages:
+          - g++-5
+          - gcc-5
+        env: &gcc-5-env
+          - CC=gcc-5
+          - CXX=g++-5
+    gcc-7: &gcc-7
+        packages:
+          - g++-7
+          - gcc-7
+        env: &gcc-7-env
+          - CC=gcc-7
+          - CXX=g++-7
+    
   windows: &windows
     os: windows
     before_script:
       - export PATH="/c/Program Files/CMake/bin":$PATH
 
-  linux: &linux
-    os: linux
-
   osx: &osx
     os: osx
-
-  gcc49: &gcc49
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - g++-4.9
-          - gcc-4.9    
-    x-env: &gcc49-env
-      - CC=gcc-4.9
-      - CXX=g++-4.9
-      - CMAKE_GENERATOR="Unix Makefiles"
-
-  gcc5: &gcc5
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - g++-5
-          - gcc-5    
-    x-env: &gcc5-env
-      - CC=gcc-5
-      - CXX=g++-5
-      - CMAKE_GENERATOR="Unix Makefiles"
-
-  gcc49: &gcc7
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - g++-7
-          - gcc-7    
-    x-env: &gcc7-env
-      - CC=gcc-7
-      - CXX=g++-7
-      - CMAKE_GENERATOR="Unix Makefiles"
-
 
 matrix:  
   include:      
@@ -68,23 +59,18 @@ matrix:
 
     - name: Linux - GCC4.9 - x64
       <<: *linux
-      <<: *gcc49
-      env:
-        <<: *gcc49-env
-        - CMAKE_BUILD_TYPE=Release
+      <<: *gcc-49
+      env: [ *release-env, *gcc-49-env ]
 
     - name: Linux - GCC5 - x64
       <<: *linux
       <<: *gcc5
-      env:
-        <<: *gcc5-env
-        - CMAKE_BUILD_TYPE=Release
+      env: [ *release-env, *gcc-5-env ]
 
     - name: Linux - GCC7 - x64
       <<: *linux
-      env:
-        <<: *gcc7-env
-        - CMAKE_BUILD_TYPE=Release
+      <<: *gcc7
+      env: [ *release-env, *gcc-7-env ]
 
     - name: Linux - Clang - x64
       <<: *linux
