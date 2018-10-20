@@ -1,10 +1,6 @@
 language: bash
 
 templates:
-     
-  clang-6:
-
-
   windows: &windows
     os: windows
     before_script:
@@ -105,7 +101,7 @@ matrix:
       os: linux
       addons:
         apt:
-          sources: llvm-toolchain-trusty-7.0
+          sources: llvm-toolchain-trusty-7
           packages: [ clang-7.0 ]
 
     ###########################################################################
