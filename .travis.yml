@@ -2,12 +2,18 @@ language: bash
 
 matrix:
   env:
-    - MATRIX_EVAL="BUILD_TYPE=Debug"
-    - MATRIX_EVAL="BUILD_TYPE=Release"
+    - BUILD_TYPE=Debug
+    - BUILD_TYPE=Release
   include:      
     - name: "Windows - MSVC"
       os: windows      
       env: PATH=C:\Program Files\CMake\bin;%PATH%
+    - name: "Linux - GCC"
+      os: linux
+      env: MATRIX_EVAL="CC=gcc && CXX=g++"
+    - name: "Linux - Clang"
+      os: linux
+      env: MATRIX_EVAL="CC=clang && CXX=clang++"
 
 before_install:
   - eval "${MATRIX_EVAL}"
