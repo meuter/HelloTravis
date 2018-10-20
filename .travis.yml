@@ -4,11 +4,11 @@ matrix:
   include:      
     - name: "Windows - MSVC"
       os: windows      
-      install: choco install --force cmake
-      env: CMAKE_PATH="/c/Program Files/CMake/bin"
-
-before_install:
-  - eval "${MATRIX_EVAL}"
+      env:
+        - CMAKE_PATH="/c/Program Files/CMake/bin"
+        - BUILD_TYPE=Release
+      script:
+        - export PATH=$CMAKE_PATH:$PATH
 
 before_script:
   - mkdir -p build
