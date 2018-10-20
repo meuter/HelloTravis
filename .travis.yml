@@ -34,23 +34,23 @@ matrix:
     # Clang on OSX
     ###########################################################################
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles"
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
       os: osx
       osx_image: xcode10
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
       os: osx
       osx_image: xcode9.4
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
       os: osx
       osx_image: xcode8.3
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
       os: osx
       osx_image: xcode7.3
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
       os: osx
       osx_image: xcode6.4
 
@@ -58,26 +58,26 @@ matrix:
     # GCC on Linux
     ###########################################################################
 
-    - env: CXX=g++-4.9 CC=gcc-4.9 GENERATOR="Unix Makefiles"
+    - env: GENERATOR="Unix Makefiles" CXX=g++-4.9 CC=gcc-4.9
       os: linux
       addons:
         apt:
           sources: ubuntu-toolchain-r-test
           packages: [ g++-4.9, gcc-4.9 ]      
-          
-    - env: CXX=g++-5 CC=gcc-5 GENERATOR="Unix Makefiles"
+
+    - env: GENERATOR="Unix Makefiles" CXX=g++-5 CC=gcc-5
       os: linux
       <<: *gcc-5
       
-    - env: CXX=g++-6 CC=gcc-6 GENERATOR="Unix Makefiles"
+    - env: GENERATOR="Unix Makefiles" CXX=g++-6 CC=gcc-6
       os: linux
       <<: *gcc-6
       
-    - env: CXX=g++-7 CC=gcc-7 GENERATOR="Unix Makefiles"
+    - env: GENERATOR="Unix Makefiles" CXX=g++-7 CC=gcc-7
       os: linux
       <<: *gcc-7
       
-    - env: CXX=g++-8 CC=gcc-8 GENERATOR="Unix Makefiles"
+    - env: GENERATOR="Unix Makefiles" CXX=g++-8 CC=gcc-8
       os: linux
       <<: *gcc-8
       
@@ -85,7 +85,7 @@ matrix:
     # Clang on Linux
     ###########################################################################
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles"
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
       os: linux
 
     # TODO(cme): cover clang multiple version
