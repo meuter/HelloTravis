@@ -12,8 +12,8 @@ matrix:
         - mkdir -p build
         - cd build  
         - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
-        - cmake --build . -- -j10
-        - ctest -j10 -C ${BUILD_TYPE} --output-on-failure
+        - cmake --build .
+        - ctest -C ${BUILD_TYPE} --output-on-failure
 
 notifications:
   email: false
