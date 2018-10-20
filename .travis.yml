@@ -29,6 +29,14 @@ templates:
         env: &gcc-5-env
           - CC=gcc-5
           - CXX=g++-5
+    gcc-6: &gcc-6
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-6, gcc6 ]
+        env: &gcc-7-env
+          - CC=gcc-6
+          - CXX=g++-6
     gcc-7: &gcc-7
       addons:
         apt:
@@ -37,6 +45,14 @@ templates:
         env: &gcc-7-env
           - CC=gcc-7
           - CXX=g++-7
+    gcc-8: &gcc-8
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-8, gcc-8 ]
+        env: &gcc-7-env
+          - CC=gcc-8
+          - CXX=g++-8
     clang:
       env: &clang-env
         - CC=clang
@@ -69,17 +85,17 @@ matrix:
       <<: *release
       env: [ *windows-env, *release-env, *msvc15-x64-env ] 
 
-    - name: "Windows - MSVC15 - x86 - Release"
-      <<: *windows
-      <<: *msvc15-x86
-      <<: *release
-      env: [ *windows-env, *release-env, *msvc15-x86-env ] 
-
     - name: "Windows - MSVC15 - x64 - Debug"
       <<: *windows
       <<: *msvc15-x64
       <<: *debug
       env: [ *windows-env, *debug-env, *msvc15-x64-env ] 
+
+    - name: "Windows - MSVC15 - x86 - Release"
+      <<: *windows
+      <<: *msvc15-x86
+      <<: *release
+      env: [ *windows-env, *release-env, *msvc15-x86-env ] 
 
     - name: "Windows - MSVC15 - x86 - Debug"
       <<: *windows
@@ -99,11 +115,23 @@ matrix:
       <<: *release
       env: [ *linux-env, *release-env, *gcc-5-env ]
 
+    - name: "Linux - GCC 6 - x64 - Release"
+      <<: *linux
+      <<: *gcc-6
+      <<: *release
+      env: [ *linux-env, *release-env, *gcc-6-env ]
+
     - name: "Linux - GCC 7 - x64 - Release"    
       <<: *linux
       <<: *gcc-7
       <<: *release
       env: [ *linux-env, *release-env, *gcc-7-env ]
+
+    - name: "Linux - GCC 8 - x64 - Release"    
+      <<: *linux
+      <<: *gcc-8
+      <<: *release
+      env: [ *linux-env, *release-env, *gcc-8-env ]
 
     - name: "Linux - Clang - x64 - Release"
       <<: *linux    
