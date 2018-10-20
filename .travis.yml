@@ -7,6 +7,9 @@ templates:
       - export PATH="/c/Program Files/CMake/bin":$PATH
   linux: &linux
     os: linux
+  osx: &osx
+    os: osx
+
 
 matrix:  
   include:      
@@ -22,7 +25,7 @@ matrix:
         - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Visual Studio 15 2017"
 
-    - name: Linux - GCC
+    - name: Linux - GCC - x64
       <<: *linux
       env:
         - CC=gcc
@@ -30,11 +33,17 @@ matrix:
         - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Unix Makefiles"
 
-    - name: Linux - Clang
+    - name: Linux - Clang - x64
       <<: *linux
       env:
         - CC=clang
         - CXX=clang++
+        - CMAKE_BUILD_TYPE=Release
+        - CMAKE_GENERATOR="Unix Makefiles"
+
+    - name: OS-X - Clang - x64
+      <<: *osx
+      env:
         - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Unix Makefiles"
 
