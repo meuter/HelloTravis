@@ -4,7 +4,7 @@ matrix:
   include:      
     - name: "Windows - MSVC"
       os: windows      
-      env: PATH="$PATH:/c/Program\ File/CMake/bin/"
+      env: PATH="$PATH:/c/Program File/CMake/bin/"
     - name: "Linux - GCC"
       os: linux
       env: MATRIX_EVAL="CC=gcc && CXX=g++"
@@ -17,7 +17,7 @@ before_install:
 
 before_script:
   - export
-  - ls /c/Program\ File/CMake/bin/
+  - ls /c/Program\ File/
   - mkdir -p build
   - cd build  
   - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
