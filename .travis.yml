@@ -4,10 +4,12 @@ matrix:
   include:  
     ## Windows
     - os: windows
+      install: choco install cmake
       env: MATRIX_EVAL="BUILT_TYPE=Release"
 
     ## Windows
     - os: windows
+      install: choco install cmake
       env: MATRIX_EVAL="BUILT_TYPE=Debug"
 
 
