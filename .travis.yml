@@ -5,12 +5,12 @@ matrix:
     ## Windows
     - os: windows
       install: choco install cmake
-      env: MATRIX_EVAL="BUILT_TYPE=Release"
+      env: MATRIX_EVAL="BUILD_TYPE=Release"
 
     ## Windows
     - os: windows
       install: choco install cmake
-      env: MATRIX_EVAL="BUILT_TYPE=Debug"
+      env: MATRIX_EVAL="BUILD_TYPE=Debug"
 
 
 before_install:
