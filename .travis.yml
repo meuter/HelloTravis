@@ -3,7 +3,7 @@ language: bash
 templates:
   release: &release
     env: &release-env
-      - BUILD=Release
+      -
   
   debug: &debug
     env: &debug-env
@@ -47,43 +47,23 @@ matrix:
     # Clang on OSX
     ###########################################################################
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles"
       os: osx
       osx_image: xcode10
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
-      os: osx
-      osx_image: xcode10
-
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" 
       os: osx
       osx_image: xcode9.4
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
-      os: osx
-      osx_image: xcode9.4
-
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" 
       os: osx
       osx_image: xcode8.3
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
-      os: osx
-      osx_image: xcode8.3
-
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" 
       os: osx
       osx_image: xcode7.3
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
-      os: osx
-      osx_image: xcode7.3
-
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Release
-      os: osx
-      osx_image: xcode6.4
-
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" 
       os: osx
       osx_image: xcode6.4
 
@@ -91,54 +71,31 @@ matrix:
     # GCC on Linux
     ###########################################################################
 
-    - env: CXX=g++-4.9 CC=gcc-4.9 GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=g++-4.9 CC=gcc-4.9 GENERATOR="Unix Makefiles"
       os: linux
       <<: *gcc-49
       
-    - env: CXX=g++-4.9 CC=gcc-4.9 GENERATOR="Unix Makefiles" BUILD=Debug
-      os: linux
-      <<: *gcc-49
-      
-    - env: CXX=g++-5 CC=gcc-5 GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=g++-5 CC=gcc-5 GENERATOR="Unix Makefiles"
       os: linux
       <<: *gcc-5
       
-    - env: CXX=g++-5 CC=gcc-5 GENERATOR="Unix Makefiles" BUILD=Debug
-      os: linux
-      <<: *gcc-5
-
-    - env: CXX=g++-6 CC=gcc-6 GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=g++-6 CC=gcc-6 GENERATOR="Unix Makefiles"
       os: linux
       <<: *gcc-6
       
-    - env: CXX=g++-6 CC=gcc-6 GENERATOR="Unix Makefiles" BUILD=Debug
-      os: linux
-      <<: *gcc-6
-
-    - env: CXX=g++-7 CC=gcc-7 GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=g++-7 CC=gcc-7 GENERATOR="Unix Makefiles"
       os: linux
       <<: *gcc-7
       
-    - env: CXX=g++-7 CC=gcc-7 GENERATOR="Unix Makefiles" BUILD=Debug
-      os: linux
-      <<: *gcc-7
-
-    - env: CXX=g++-8 CC=gcc-8 GENERATOR="Unix Makefiles" BUILD=Release
+    - env: CXX=g++-8 CC=gcc-8 GENERATOR="Unix Makefiles"
       os: linux
       <<: *gcc-8
       
-    - env: CXX=g++-8 CC=gcc-8 GENERATOR="Unix Makefiles" BUILD=Debug
-      os: linux
-      <<: *gcc-8
-
     ###########################################################################
     # Clang on Linux
     ###########################################################################
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Release
-      os: linux
-
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles"
       os: linux
 
     # TODO(cme): cover clang multiple version
@@ -147,16 +104,10 @@ matrix:
     # MSVC on Windows
     ###########################################################################
 
-    - env: GENERATOR="Visual Studio 15 2017 Win64" BUILD=Release
+    - env: GENERATOR="Visual Studio 15 2017 Win64"
       <<: *windows
 
-    - env: GENERATOR="Visual Studio 15 2017 Win64" BUILD=Debug
-      <<: *windows
-
-    - env: GENERATOR="Visual Studio 15 2017" BUILD=Release
-      <<: *windows
-
-    - env: GENERATOR="Visual Studio 15 2017" BUILD=Debug
+    - env: GENERATOR="Visual Studio 15 2017"
       <<: *windows
 
     ###########################################################################
@@ -166,11 +117,23 @@ matrix:
     # TODO(cme): do it
 
 script:
-  - mkdir -p build
-  - cd build  
-  - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=${BUILD} ..
-  - cmake --build . --config ${BUILD} -- ${BUILD_ARGS}
-  - ctest --output-on-failure
+  ###########################################################################
+  # Debug
+  ###########################################################################
+  - mkdir -p build/Debug
+  - cd build/Debug
+  - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=Debug ../../
+  - cmake --build . --config Debug
+  - ctest -C Debug --output-on-failure
+
+  ###########################################################################
+  # Release
+  ###########################################################################
+  - mkdir -p build/Release
+  - cd build/Release
+  - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=Release ../../
+  - cmake --build . --config Release
+  - ctest -C Release --output-on-failure
 
 notifications:
   email: false
