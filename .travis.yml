@@ -62,7 +62,7 @@ templates:
   windows: &windows
     os: windows
     env: &windows-env
-      - CMAKE_BUILD_CMD_ARGS="/nologo /verbosity:normal"
+      - BUILD_ARGS="/nologo /verbosity:normal"
     before_script:
       - export PATH="/c/Program Files/CMake/bin":$PATH
     msvc15-x64: &msvc15-x64
@@ -83,7 +83,7 @@ matrix:
       os: osx
       osx_image: xcode10
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug"
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
       os: osx
       osx_image: xcode10
 
@@ -91,7 +91,7 @@ matrix:
       os: osx
       osx_image: xcode9.4
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug"
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
       os: osx
       osx_image: xcode9.4
 
@@ -99,7 +99,7 @@ matrix:
       os: osx
       osx_image: xcode8.3
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug"
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
       os: osx
       osx_image: xcode8.3
 
@@ -107,7 +107,7 @@ matrix:
       os: osx
       osx_image: xcode7.3
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug"
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
       os: osx
       osx_image: xcode7.3
 
@@ -115,7 +115,7 @@ matrix:
       os: osx
       osx_image: xcode6.4
 
-    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug"
+    - env: CXX=clang++ CC=clang GENERATOR="Unix Makefiles" BUILD=Debug
       os: osx
       osx_image: xcode6.4
 
@@ -191,7 +191,7 @@ script:
   - mkdir -p build
   - cd build  
   - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=${BUILD} ..
-  - cmake --build . --config ${BUILD} -- ${CMAKE_BUILD_ARGS}
+  - cmake --build . --config ${BUILD} -- ${BUILD_ARGS}
   - ctest --output-on-failure
 
 notifications:
