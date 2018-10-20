@@ -1,14 +1,6 @@
 language: bash
 
 templates:
-  release: &release
-    env: &release-env
-      -
-  
-  debug: &debug
-    env: &debug-env
-      - BUILD=Debug
-
   gcc-4.9: &gcc-49      
     addons:
       apt:
@@ -124,7 +116,7 @@ script:
   - cd build/Debug
   - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=Debug ../../
   - cmake --build . --config Debug
-  - ctest -C Debug --output-on-failure
+  - ctest --output-on-failure
 
   ###########################################################################
   # Release
@@ -133,7 +125,7 @@ script:
   - cd build/Release
   - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=Release ../../
   - cmake --build . --config Release
-  - ctest -C Release --output-on-failure
+  - ctest --output-on-failure
 
 notifications:
   email: false
