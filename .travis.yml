@@ -5,10 +5,52 @@ templates:
     os: windows
     before_script:
       - export PATH="/c/Program Files/CMake/bin":$PATH
+
   linux: &linux
     os: linux
+
   osx: &osx
     os: osx
+
+  gcc49: &gcc49
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - g++-4.9
+          - gcc-4.9    
+    x-env: &gcc49-env
+      - CC=gcc-4.9
+      - CXX=g++-4.9
+      - CMAKE_GENERATOR="Unix Makefiles"
+
+  gcc5: &gcc5
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - g++-5
+          - gcc-5    
+    x-env: &gcc5-env
+      - CC=gcc-5
+      - CXX=g++-5
+      - CMAKE_GENERATOR="Unix Makefiles"
+
+  gcc49: &gcc7
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - g++-7
+          - gcc-7    
+    x-env: &gcc7-env
+      - CC=gcc-7
+      - CXX=g++-7
+      - CMAKE_GENERATOR="Unix Makefiles"
+
 
 matrix:  
   include:      
@@ -26,27 +68,23 @@ matrix:
 
     - name: Linux - GCC4.9 - x64
       <<: *linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-4.9
-            - gcc-4.9
+      <<: *gcc49
       env:
-        - CC=gcc-4.9
-        - CXX=g++-4.9
+        <<: *gcc49-env
         - CMAKE_BUILD_TYPE=Release
-        - CMAKE_GENERATOR="Unix Makefiles"
 
+    - name: Linux - GCC5 - x64
+      <<: *linux
+      <<: *gcc5
+      env:
+        <<: *gcc5-env
+        - CMAKE_BUILD_TYPE=Release
 
-    - name: Linux - GCC - x64
+    - name: Linux - GCC7 - x64
       <<: *linux
       env:
-        - CC=gcc
-        - CXX=g++
+        <<: *gcc7-env
         - CMAKE_BUILD_TYPE=Release
-        - CMAKE_GENERATOR="Unix Makefiles"
 
     - name: Linux - Clang - x64
       <<: *linux
