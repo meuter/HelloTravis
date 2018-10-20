@@ -117,6 +117,7 @@ script:
   - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=Debug ../../
   - cmake --build . --config Debug
   - ctest --output-on-failure
+  - cd ../..
 
   ###########################################################################
   # Release
@@ -126,6 +127,7 @@ script:
   - cmake -G "${GENERATOR}" -DCMAKE_BUILD_BUILD=Release ../../
   - cmake --build . --config Release
   - ctest --output-on-failure
+  - cd ../..
 
 notifications:
   email: false
