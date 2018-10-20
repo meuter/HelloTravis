@@ -10,41 +10,46 @@ templates:
   osx: &osx
     os: osx
 
+  release:
+    env+:
+      - CMAKE_BUILD_TYPE=Release
+      
+
 
 matrix:  
   include:      
     - name: Windows - MSVC - x64
       <<: *windows
+      <<: *release
       env: 
-        - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Visual Studio 15 2017 Win64"
 
     - name: Windows - MSVC - x86
       <<: *windows
-      env: 
-        - CMAKE_BUILD_TYPE=Release
+      <<: *release
+      env:
         - CMAKE_GENERATOR="Visual Studio 15 2017"
 
     - name: Linux - GCC - x64
       <<: *linux
+      <<: *release
       env:
         - CC=gcc
         - CXX=g++
-        - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Unix Makefiles"
 
     - name: Linux - Clang - x64
       <<: *linux
+      <<: *release
       env:
         - CC=clang
         - CXX=clang++
-        - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Unix Makefiles"
 
     - name: OS-X - Clang - x64
       <<: *osx
+      <<: *release
       env:
-        - CMAKE_BUILD_TYPE=Release
         - CMAKE_GENERATOR="Unix Makefiles"
 
 script:
