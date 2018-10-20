@@ -122,24 +122,28 @@ matrix:
       install:
         - choco install llvm --version 6.0.0 --force
         - choco install ninja
+        - choco install visualstudio2017-workload-vctools --force
       <<: *windows
 
     - env: GENERATOR="Ninja" CXX=clang-cl CC=clang-cl CFLAGS=-m64 CXXFLAGS=-m64
       install:
         - choco install llvm --version 6.0.0 --force
         - choco install ninja
+        - choco install visualstudio2017-workload-vctools --force
       <<: *windows
 
     - env: GENERATOR="Ninja" CXX=clang-cl CC=clang-cl CFLAGS=-m32 CXXFLAGS=-m32
       install:
         - choco install llvm --version 7.0.0 --force
         - choco install ninja
+        - choco install visualstudio2017-workload-vctools --force
       <<: *windows
 
     - env: GENERATOR="Ninja" CXX=clang-cl CC=clang-cl CFLAGS=-m64 CXXFLAGS=-m64
       install:
         - choco install llvm --version 7.0.0 --force
         - choco install ninja
+        - choco install visualstudio2017-workload-vctools --force
       <<: *windows
 
 script:
