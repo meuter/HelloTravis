@@ -17,23 +17,23 @@ matrix:
     # Clang on OSX
     ###########################################################################
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
       os: osx
       osx_image: xcode10
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++ CC=clang 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang 
       os: osx
       osx_image: xcode9.4
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++ CC=clang 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang 
       os: osx
       osx_image: xcode8.3
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++ CC=clang 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang 
       os: osx
       osx_image: xcode7.3
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++ CC=clang 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang 
       os: osx
       osx_image: xcode6.4
 
@@ -41,35 +41,35 @@ matrix:
     # GCC on Linux
     ###########################################################################
 
-    - env:  GENERATOR="Unix Makefiles" CXX=g++-4.9 CC=gcc-4.9
+    - env: GENERATOR="Unix Makefiles" CXX=g++-4.9 CC=gcc-4.9
       os: linux
       addons:
         apt:
           sources: ubuntu-toolchain-r-test
           packages: [ g++-4.9, gcc-4.9 ]
       
-    - env:  GENERATOR="Unix Makefiles" CXX=g++-5 CC=gcc-5
+    - env: GENERATOR="Unix Makefiles" CXX=g++-5 CC=gcc-5
       os: linux
       addons:
         apt:
           sources: ubuntu-toolchain-r-test
           packages: [ g++-5, gcc-5 ]
       
-    - env:  GENERATOR="Unix Makefiles" CXX=g++-6 CC=gcc-6
+    - env: GENERATOR="Unix Makefiles" CXX=g++-6 CC=gcc-6
       os: linux
       addons:
         apt:
           sources: ubuntu-toolchain-r-test
           packages: [ g++-6, gcc-6 ]      
       
-    - env:  GENERATOR="Unix Makefiles" CXX=g++-7 CC=gcc-7
+    - env: GENERATOR="Unix Makefiles" CXX=g++-7 CC=gcc-7
       os: linux
       addons:
         apt:
           sources: ubuntu-toolchain-r-test
           packages: [ g++-7, gcc-7 ]      
 
-    - env:  GENERATOR="Unix Makefiles" CXX=g++-8 CC=gcc-8
+    - env: GENERATOR="Unix Makefiles" CXX=g++-8 CC=gcc-8
       os: linux
       addons:
         apt:
@@ -80,28 +80,28 @@ matrix:
     # Clang on Linux
     ###########################################################################
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++-4 CC=clang-4
+    - env: GENERATOR="Unix Makefiles" CXX=clang++-4.0 CC=clang-4.0
       os: linux
       addons:
         apt:
           sources: llvm-toolchain-trusty-4.0
           packages: [ clang-4.0 ]
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++-5 CC=clang-5
+    - env: GENERATOR="Unix Makefiles" CXX=clang++-5.0 CC=clang-5.0
       os: linux
       addons:
         apt:
           sources: llvm-toolchain-trusty-5.0
           packages: [ clang-5.0 ]
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++-6 CC=clang-6
+    - env: GENERATOR="Unix Makefiles" CXX=clang++-6.0 CC=clang-6.0
       os: linux
       addons:
         apt:
           sources: llvm-toolchain-trusty-6.0
           packages: [ clang-6.0 ]
 
-    - env:  GENERATOR="Unix Makefiles" CXX=clang++-7 CC=clang-7
+    - env: GENERATOR="Unix Makefiles" CXX=clang++-7.0 CC=clang-7.0
       os: linux
       addons:
         apt:
@@ -112,10 +112,10 @@ matrix:
     # MSVC on Windows
     ###########################################################################
 
-    - env: GENERATOR="Visual Studio 15 2017 Win64"
+    - env:GENERATOR="Visual Studio 15 2017 Win64"
       <<: *windows
 
-    - env: GENERATOR="Visual Studio 15 2017"
+    - env:GENERATOR="Visual Studio 15 2017"
       <<: *windows
 
     ###########################################################################
