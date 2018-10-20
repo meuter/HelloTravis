@@ -20,7 +20,7 @@ templates:
           packages: [ g++-4.9, gcc-4.9 ]
       env: &gcc-49-env
         - CC=gcc-4.9
-        - CXX=g++-4.9
+        - CXX=g++-4.9        
     gcc-5: &gcc-5
       addons:
         apt:
@@ -37,8 +37,12 @@ templates:
         env: &gcc-7-env
           - CC=gcc-7
           - CXX=g++-7
-        
-    
+    clang:
+      env: &clang-env
+        - CC=clang
+        - CXX=clang++
+
+            
   windows: &windows
     os: windows
     env: &windows-env
@@ -53,52 +57,41 @@ templates:
 
   osx: &osx
     os: osx
+    env: &osx-env
+      - CMAKE_GENERATOR="Unix Makefiles"      
 
 matrix:  
   include:      
-    - name: Windows - MSVC - Release - x64
-      <<: *windows
+    - <<: *windows
       <<: *msvc15-x64
       <<: *release
       env: [ *windows-env, *release-env, *msvc15-x64-env ] 
 
-    - name: Windows - MSVC - Release - x86
-      <<: *windows
+    - <<: *windows
       <<: *msvc15-x86
       <<: *release
       env: [ *windows-env, *release-env, *msvc15-x86-env ] 
 
-    - name: Linux - GCC4.9 - Release - x64
-      <<: *linux
+    - <<: *linux
       <<: *gcc-49
       <<: *release
       env: [ *linux-env, *release-env, *gcc-49-env ]
 
-    - name: Linux - GCC5 - Release - x64
-      <<: *linux
+    - <<: *linux
       <<: *gcc-5
       <<: *release
       env: [ *linux-env, *release-env, *gcc-5-env ]
 
-    - name: Linux - GCC7 - Release - x64
-      <<: *linux
+    - <<: *linux
       <<: *gcc-7
       <<: *release
       env: [ *linux-env, *release-env, *gcc-7-env ]
 
-    - name: Linux - Clang - x64
-      <<: *linux
-      env:
-        - CC=clang
-        - CXX=clang++
-        - CMAKE_BUILD_TYPE=Release
-        - CMAKE_GENERATOR="Unix Makefiles"
+    - <<: *linux      
+      env: [ *linux-env, *release-env, *clang-env ]
 
-    - name: OS-X - Clang - x64
-      <<: *osx
-      env:
-        - CMAKE_BUILD_TYPE=Release
-        - CMAKE_GENERATOR="Unix Makefiles"
+    - <<: *osx
+      env: [ *osx-env, *release-env ]
 
 script:
   - mkdir -p build
