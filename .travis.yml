@@ -33,7 +33,7 @@ templates:
       addons:
         apt:
           sources: ubuntu-toolchain-r-test
-          packages: [ g++-6, gcc6 ]
+          packages: [ g++-6, gcc-6 ]
         env: &gcc-7-env
           - CC=gcc-6
           - CXX=g++-6
@@ -70,7 +70,7 @@ templates:
         - CMAKE_GENERATOR="Visual Studio 15 2017 Win64"
     msvc15-x86: &msvc15-x86
       env: &msvc15-x86-env
-        - CMAKE_GENERATOR="Visual Studio 15 2017"
+        - CMAKE_GENERATOR="Visual Studio 15 2017"    
 
   osx: &osx
     os: osx
