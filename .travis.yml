@@ -90,6 +90,13 @@ matrix:
           sources: llvm-toolchain-trusty-5.0
           packages: [ clang-5.0 ]
 
+    - env: GENERATOR="Unix Makefiles" CXX=clang++-6.0 CC=clang-6.0
+      os: linux
+      addons:
+        apt:
+          sources: llvm-toolchain-trusty-6.0
+          packages: [ clang-6.0 ]
+          
     ###########################################################################
     # MSVC on Windows
     ###########################################################################
