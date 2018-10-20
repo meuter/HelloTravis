@@ -94,9 +94,16 @@ matrix:
       os: linux
       addons:
         apt:
-          sources: llvm-toolchain-trusty-6.0
+          sources: [ llvm-toolchain-trusty-6.0, ubuntu-toolchain-r-test ]
           packages: [ clang-6.0 ]
           
+    - env: GENERATOR="Unix Makefiles" CXX=clang++-7 CC=clang-7
+      os: linux
+      addons:
+        apt:
+          sources: [ llvm-toolchain-trusty-7, ubuntu-toolchain-r-test ]
+          packages: [ clang-7 ]
+
     ###########################################################################
     # MSVC on Windows
     ###########################################################################
