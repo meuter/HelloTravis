@@ -76,10 +76,19 @@ matrix:
     # Clang on Linux
     ###########################################################################
 
-    - env: GENERATOR="Unix Makefiles" CXX=clang++ CC=clang
+    - env: GENERATOR="Unix Makefiles" CXX=clang++-4.0 CC=clang-4.0
       os: linux
+      addons:
+        apt:
+          sources: llvm-toolchain-trusty-4.0
+          packages: [ clang-4.0 ]
 
-    # TODO(cme): cover clang multiple version
+    - env: GENERATOR="Unix Makefiles" CXX=clang++-5.0 CC=clang-5.0
+      os: linux
+      addons:
+        apt:
+          sources: llvm-toolchain-trusty-5.0
+          packages: [ clang-5.0 ]
 
     ###########################################################################
     # MSVC on Windows
