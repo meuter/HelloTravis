@@ -11,28 +11,29 @@ templates:
 
   linux: &linux
     os: linux
-    sources:
-      - ubuntu-toolchain-r-test
     env: &linux-env
       - CMAKE_GENERATOR="Unix Makefiles"
-    gcc-4.9: &gcc-49
-        packages:
-          - g++-4.9
-          - gcc-4.9
-        env: &gcc-49-env
-          - CC=gcc-4.9
-          - CXX=g++-4.9
+    gcc-4.9: &gcc-49      
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-4.9, gcc-4.9 ]
+      env: &gcc-49-env
+        - CC=gcc-4.9
+        - CXX=g++-4.9
     gcc-5: &gcc-5
-        packages:
-          - g++-5
-          - gcc-5
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-5, gcc-5 ]
         env: &gcc-5-env
           - CC=gcc-5
           - CXX=g++-5
     gcc-7: &gcc-7
-        packages:
-          - g++-7
-          - gcc-7
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-7, gcc-7 ]
         env: &gcc-7-env
           - CC=gcc-7
           - CXX=g++-7
