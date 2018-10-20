@@ -13,6 +13,8 @@ templates:
     os: linux
     sources:
       - ubuntu-toolchain-r-test
+    env: &linux-env
+      - CMAKE_GENERATOR="Unix Makefiles"
     gcc-4.9: &gcc-49
         packages:
           - g++-4.9
@@ -34,46 +36,54 @@ templates:
         env: &gcc-7-env
           - CC=gcc-7
           - CXX=g++-7
+        
     
   windows: &windows
     os: windows
+    env: &windows-env
     before_script:
       - export PATH="/c/Program Files/CMake/bin":$PATH
+    msvc15-x64: &msvc15-x64
+      env: &msvc15-x64-env
+        - CMAKE_GENERATOR="Visual Studio 15 2017 Win64"
+    msvc15-x86: &msvc15-x86
+      env: &msvc15-x86-env
+        - CMAKE_GENERATOR="Visual Studio 15 2017"
 
   osx: &osx
     os: osx
 
 matrix:  
   include:      
-    - name: Windows - MSVC - x64
+    - name: Windows - MSVC - Release - x64
       <<: *windows
-      env: 
-        - CMAKE_BUILD_TYPE=Release
-        - CMAKE_GENERATOR="Visual Studio 15 2017 Win64"
+      <<: *msvc15-x64
+      <<: *release
+      env: [ *windows-env, *release-env, *msvc15-x64-env ] 
 
-    - name: Windows - MSVC - x86
+    - name: Windows - MSVC - Release - x86
       <<: *windows
-      env: 
-        - CMAKE_BUILD_TYPE=Release
-        - CMAKE_GENERATOR="Visual Studio 15 2017"
+      <<: *msvc15-x86
+      <<: *release
+      env: [ *windows-env, *release-env, *msvc15-x86-env ] 
 
-    - name: Linux - GCC4.9 - x64
+    - name: Linux - GCC4.9 - Release - x64
       <<: *linux
       <<: *gcc-49
       <<: *release
-      env: [ *release-env, *gcc-49-env ]
+      env: [ *linux-env, *release-env, *gcc-49-env ]
 
-    - name: Linux - GCC5 - x64
+    - name: Linux - GCC5 - Release - x64
       <<: *linux
       <<: *gcc-5
       <<: *release
-      env: [ *release-env, *gcc-5-env ]
+      env: [ *linux-env, *release-env, *gcc-5-env ]
 
-    - name: Linux - GCC7 - x64
+    - name: Linux - GCC7 - Release - x64
       <<: *linux
       <<: *gcc-7
       <<: *release
-      env: [ *release-env, *gcc-7-env ]
+      env: [ *linux-env, *release-env, *gcc-7-env ]
 
     - name: Linux - Clang - x64
       <<: *linux
