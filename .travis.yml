@@ -4,12 +4,12 @@ matrix:
   include:      
     - name: "Windows - MSVC - Release"
       os: windows
-      install: choco install cmake.install --installargs '"ADD_CMAKE_TO_PATH=User"'
+      install: choco install --force cmake.install --installargs '"ADD_CMAKE_TO_PATH=User"'
       env: MATRIX_EVAL="BUILD_TYPE=Release"
     
     - name: "Windows - MSVC - Debug"
       os: windows
-      install: choco install cmake.install --installargs '"ADD_CMAKE_TO_PATH=User"'
+      install: choco install --force cmake.install --installargs '"ADD_CMAKE_TO_PATH=User"'
       env: MATRIX_EVAL="BUILD_TYPE=Debug"
 
 
