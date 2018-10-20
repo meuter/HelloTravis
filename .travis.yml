@@ -1,12 +1,18 @@
-language: cpp
+language: bash
 
-compiler:
-  - gcc
-  - clang
+matrix:
+  include:  
+    ## Windows
+    - os: windows
+      env: MATRIX_EVAL="BUILT_TYPE=Release"
 
-env:
-  - BUILD_TYPE=Debug
-  - BUILD_TYPE=Release
+    ## Windows
+    - os: windows
+      env: MATRIX_EVAL="BUILT_TYPE=Debug"
+
+
+before_install:
+  - eval "${MATRIX_EVAL}"
 
 before_script:
   - mkdir -p build
@@ -19,3 +25,5 @@ script:
 
 notifications:
   email: false
+
+    
