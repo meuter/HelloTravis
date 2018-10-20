@@ -1,11 +1,6 @@
 language: bash
 
 templates:
-  gcc-4.9: &gcc-49      
-    addons:
-      apt:
-        sources: ubuntu-toolchain-r-test
-        packages: [ g++-4.9, gcc-4.9 ]
   gcc-5: &gcc-5
     addons:
       apt:
@@ -65,8 +60,11 @@ matrix:
 
     - env: CXX=g++-4.9 CC=gcc-4.9 GENERATOR="Unix Makefiles"
       os: linux
-      <<: *gcc-49
-      
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-4.9, gcc-4.9 ]      
+          
     - env: CXX=g++-5 CC=gcc-5 GENERATOR="Unix Makefiles"
       os: linux
       <<: *gcc-5
