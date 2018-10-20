@@ -7,7 +7,7 @@ matrix:
   include:      
     - name: "Windows - MSVC"
       os: windows      
-      env: PATH=C:\Program Files\CMake\bin;%PATH%
+      env: PATH="/c/Program Files/CMake/bin/cmake":$PATH
     - name: "Linux - GCC"
       os: linux
       env: MATRIX_EVAL="CC=gcc && CXX=g++"
