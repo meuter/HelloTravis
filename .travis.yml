@@ -99,7 +99,7 @@ matrix:
       addons:
         apt:
           sources: llvm-toolchain-trusty-6.0
-          packages: [ clang-6.0 ]
+          packages: [ clang-6.0, libstdc++6 ]
 
     - env: GENERATOR="Unix Makefiles" CXX=clang++-7.0 CC=clang-7.0
       os: linux
