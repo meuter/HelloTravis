@@ -1,27 +1,6 @@
 language: bash
 
 templates:
-  gcc-5: &gcc-5
-    addons:
-      apt:
-        sources: ubuntu-toolchain-r-test
-        packages: [ g++-5, gcc-5 ]
-  gcc-6: &gcc-6
-    addons:
-      apt:
-        sources: ubuntu-toolchain-r-test
-        packages: [ g++-6, gcc-6 ]
-  gcc-7: &gcc-7
-    addons:
-      apt:
-        sources: ubuntu-toolchain-r-test
-        packages: [ g++-7, gcc-7 ]
-  gcc-8: &gcc-8
-    addons:
-      apt:
-        sources: ubuntu-toolchain-r-test
-        packages: [ g++-8, gcc-8 ]
-          
   windows: &windows
     os: windows
     before_script:
@@ -67,19 +46,31 @@ matrix:
 
     - env: GENERATOR="Unix Makefiles" CXX=g++-5 CC=gcc-5
       os: linux
-      <<: *gcc-5
-      
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-5, gcc-5 ]
+
     - env: GENERATOR="Unix Makefiles" CXX=g++-6 CC=gcc-6
       os: linux
-      <<: *gcc-6
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-6, gcc-6 ]
       
     - env: GENERATOR="Unix Makefiles" CXX=g++-7 CC=gcc-7
       os: linux
-      <<: *gcc-7
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-7, gcc-7 ]
       
     - env: GENERATOR="Unix Makefiles" CXX=g++-8 CC=gcc-8
       os: linux
-      <<: *gcc-8
+      addons:
+        apt:
+          sources: ubuntu-toolchain-r-test
+          packages: [ g++-8, gcc-8 ]
       
     ###########################################################################
     # Clang on Linux
