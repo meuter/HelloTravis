@@ -1,24 +1,29 @@
 language: bash
 
+templates:
+  windows: &windows
+    os: windows
+
+
 matrix:  
   include:      
     - name: "Windows - MSVC - x64"
-      os: windows
+      <<: *windows
       before_script:
         - export PATH=$CMAKE_PATH:$PATH
       env: 
         - CMAKE_PATH="/c/Program Files/CMake/bin"
         - BUILD_TYPE=Release
-        - CMAKE_ARGS="-G \Visual Studio 15 2017 Win64\""        
+        - CMAKE_ARGS=-G 'Visual Studio 15 2017 Win64'"
 
     - name: "Windows - MSVC - x86"
-      os: windows
+      <<: *windows
       before_script:
         - export PATH=$CMAKE_PATH:$PATH
       env: 
         - CMAKE_PATH="/c/Program Files/CMake/bin"
         - BUILD_TYPE=Release
-        - CMAKE_ARGS="-G \Visual Studio 15 2017\""        
+        - CMAKE_ARGS="-G 'Visual Studio 15 2017"
 
     - name: "Linux - GCC"
       os: linux
