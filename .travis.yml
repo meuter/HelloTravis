@@ -1,14 +1,25 @@
 language: bash
 
+templates:
+  windows:
+    os: windows
+    env:
+      - CMAKE_PATH="/c/Program Files/CMake/bin"
+    before_script:
+      - export PATH=$CMAKE_PATH:$PATH
+
 matrix:  
   include:      
-    - name: "Windows - MSVC"
-      os: windows      
+    - name: "Windows - MSVC - x64"
+      <<: *windows
       env: 
-        - CMAKE_PATH="/c/Program Files/CMake/bin"
         - BUILD_TYPE=Release
-      before_script:
-        - export PATH=$CMAKE_PATH:$PATH
+        - CMAKE_ARGS="-G \Visual Studio 15 2017 Win64\""        
+    - name: "Windows - MSVC - x86"
+      <<: *windows
+      env: 
+        - BUILD_TYPE=Release
+        - CMAKE_ARGS="-G \Visual Studio 15 2017\""        
     - name: "Linux - GCC"
       os: linux
       env:
@@ -21,11 +32,11 @@ matrix:
         - CC=clang
         - CXX=clang++
         - BUILD_TYPE=Release
-        
+
 script:
   - mkdir -p build
   - cd build  
-  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
+  - cmake ${CMAKE_ARGS} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
   - cmake --build .
   - ctest -C ${BUILD_TYPE} --output-on-failure
 
