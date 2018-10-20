@@ -1,17 +1,13 @@
 language: bash
 
 matrix:
+  env:
+    - MATRIX_EVAL="BUILD_TYPE=Debug"
+    - MATRIX_EVAL="BUILD_TYPE=Release"
   include:      
-    - name: "Windows - MSVC - Release"
+    - name: "Windows - MSVC"
       os: windows
       install: choco install --force cmake.install --installargs '"ADD_CMAKE_TO_PATH=User"'
-      env: MATRIX_EVAL="BUILD_TYPE=Release"
-    
-    - name: "Windows - MSVC - Debug"
-      os: windows
-      install: choco install --force cmake.install --installargs '"ADD_CMAKE_TO_PATH=User"'
-      env: MATRIX_EVAL="BUILD_TYPE=Debug"
-
 
 before_install:
   - eval "${MATRIX_EVAL}"
