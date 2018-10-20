@@ -52,7 +52,7 @@ script:
   - cd build  
   - cmake -G "${CMAKE_GENERATOR}" -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ..
   - cmake --build .
-  - ctest -C ${CMAKE_BUILD_TYPE} --output-on-failure
+  - ctest --output-on-failure
 
 notifications:
   email: false
