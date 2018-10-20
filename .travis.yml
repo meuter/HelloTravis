@@ -6,8 +6,8 @@ matrix:
     - MATRIX_EVAL="BUILD_TYPE=Release"
   include:      
     - name: "Windows - MSVC"
-      os: windows
-      install: choco install --force cmake.install --installargs '"ADD_CMAKE_TO_PATH=User"'
+      os: windows      
+      env: PATH=C:\Program Files\CMake\bin;%PATH%
 
 before_install:
   - eval "${MATRIX_EVAL}"
