@@ -1,5 +1,9 @@
 language: bash
 
+env:
+  - BUILD_TYPE=Release
+  - BUILD_TYPE=Debug
+
 matrix:  
   include:      
     - name: "Windows - MSVC"
