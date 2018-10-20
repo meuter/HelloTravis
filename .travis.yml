@@ -4,34 +4,33 @@ templates:
   windows: &windows
     os: windows
     before_script:
-      - export PATH=$CMAKE_PATH:$PATH
-
+      - export PATH="/c/Program Files/CMake/bin":$PATH
+  linux: &linux
+    os: linux
 
 matrix:  
   include:      
-    - name: "Windows - MSVC - x64"
+    - name: Windows - MSVC - x64
       <<: *windows
       env: 
-        - CMAKE_PATH="/c/Program Files/CMake/bin"
         - BUILD_TYPE=Release
-        - CMAKE_ARGS="-G \"Visual Studio 15 2017 Win64\""
+        - CMAKE_ARGS=-G "Visual Studio 15 2017 Win64"
 
-    - name: "Windows - MSVC - x86"
+    - name: Windows - MSVC - x86
       <<: *windows
       env: 
-        - CMAKE_PATH="/c/Program Files/CMake/bin"
         - BUILD_TYPE=Release
-        - CMAKE_ARGS="-G \"Visual Studio 15 2017\""
+        - CMAKE_ARGS=-G "Visual Studio 15 2017"
 
-    - name: "Linux - GCC"
-      os: linux
+    - name: Linux - GCC
+      <<: *linux
       env:
         - CC=gcc
         - CXX=g++
         - BUILD_TYPE=Release
 
-    - name: "Linux - Clang"
-      os: linux
+    - name: Linux - Clang
+      <<: *linux
       env:
         - CC=clang
         - CXX=clang++
@@ -46,5 +45,3 @@ script:
 
 notifications:
   email: false
-
-    
