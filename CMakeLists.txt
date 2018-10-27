@@ -8,7 +8,10 @@ else()
 endif()
 
 if (WIN32)
-    add_compile_options(-nologo -W3 -D_CRT_SECURE_NO_DEPRECATE -wd4101 -wd4996 -wd4146)
+    add_compile_options(-nologo -W3 -D_CRT_SECURE_NO_DEPRECATE)
+else()
+    add_compile_options(-Wall -Wextra -Wno-unused -Wno-unused-parameter)
+    add_compile_options(-Wno-newline-eof -Wno-gnu-zero-variadic-macro-arguments)
 endif()
 
 set(CMAKE_CXX_STANDARD 14)
