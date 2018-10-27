@@ -6,6 +6,31 @@ templates:
     before_script:
       - export PATH="/c/Program Files/CMake/bin":$PATH
 
+  linux: &linux
+    addons:
+      apt:
+        sources:        
+          - ubuntu-toolchain-r-test
+          - llvm-toolchain-trusty-4.0
+          - llvm-toolchain-trusty-5.0
+          - llvm-toolchain-trusty-6.0
+          - llvm-toolchain-trusty-7
+        packages: 
+          - g++-4.9
+          - gcc-4.9
+          - g++-5
+          - gcc-5 
+          - g++-6
+          - gcc-6
+          - g++-7
+          - gcc-7 
+          - g++-8
+          - gcc-8 
+          - clang-4.0
+          - clang-5.0 
+          - clang-6.0
+          - clang-7 
+
 matrix:  
   include: 
 
@@ -38,71 +63,35 @@ matrix:
     ###########################################################################
 
     - env: GENERATOR="Unix Makefiles" CXX=g++-4.9 CC=gcc-4.9
-      os: linux
-      addons:
-        apt:
-          sources: ubuntu-toolchain-r-test
-          packages: [ g++-4.9, gcc-4.9 ]      
+      <<: *linux
 
     - env: GENERATOR="Unix Makefiles" CXX=g++-5 CC=gcc-5
-      os: linux
-      addons:
-        apt:
-          sources: ubuntu-toolchain-r-test
-          packages: [ g++-5, gcc-5 ]
+      <<: *linux
 
     - env: GENERATOR="Unix Makefiles" CXX=g++-6 CC=gcc-6
-      os: linux
-      addons:
-        apt:
-          sources: ubuntu-toolchain-r-test
-          packages: [ g++-6, gcc-6 ]
+      <<: *linux
       
     - env: GENERATOR="Unix Makefiles" CXX=g++-7 CC=gcc-7
-      os: linux
-      addons:
-        apt:
-          sources: ubuntu-toolchain-r-test
-          packages: [ g++-7, gcc-7 ]
+      <<: *linux
       
     - env: GENERATOR="Unix Makefiles" CXX=g++-8 CC=gcc-8
-      os: linux
-      addons:
-        apt:
-          sources: ubuntu-toolchain-r-test
-          packages: [ g++-8, gcc-8 ]
+      <<: *linux
       
     ###########################################################################
     # Clang on Linux
     ###########################################################################
 
     - env: GENERATOR="Unix Makefiles" CXX=clang++-4.0 CC=clang-4.0
-      os: linux
-      addons:
-        apt:
-          sources: llvm-toolchain-trusty-4.0
-          packages: [ clang-4.0 ]
+      <<: *linux
 
     - env: GENERATOR="Unix Makefiles" CXX=clang++-5.0 CC=clang-5.0
-      os: linux
-      addons:
-        apt:
-          sources: llvm-toolchain-trusty-5.0
-          packages: [ clang-5.0 ]
+      <<: *linux
 
     - env: GENERATOR="Unix Makefiles" CXX=clang++-6.0 CC=clang-6.0
-      os: linux
-      addons:
-        apt:
-          sources: [ llvm-toolchain-trusty-6.0, ubuntu-toolchain-r-test ]
-          packages: [ clang-6.0 ]
+      <<: *linux
           
     - env: GENERATOR="Unix Makefiles" CXX=clang++-7 CC=clang-7
-      os: linux
-      addons:
-        apt:
-          sources: [ llvm-toolchain-trusty-7, ubuntu-toolchain-r-test ]
-          packages: [ clang-7 ]
+      <<: *linux
 
     ###########################################################################
     # MSVC on Windows
